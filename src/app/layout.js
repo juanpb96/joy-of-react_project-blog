@@ -7,6 +7,7 @@ import { LIGHT_TOKENS, DARK_TOKENS, BLOG_TITLE } from "@/constants";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./styles.css";
+import RespectMotionPreferences from "@/components/RespectMotionPreferences";
 
 const mainFont = Work_Sans({
   subsets: ["latin"],
@@ -39,7 +40,9 @@ function RootLayout({ children }) {
     >
       <body>
         <Header theme={theme} />
-        <main>{children}</main>
+        <RespectMotionPreferences>
+          <main>{children}</main>
+        </RespectMotionPreferences>
         <Footer />
       </body>
     </html>
