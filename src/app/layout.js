@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./styles.css";
 import RespectMotionPreferences from "@/components/RespectMotionPreferences";
+import { cookies } from "next/headers";
 
 const mainFont = Work_Sans({
   subsets: ["latin"],
@@ -27,19 +28,18 @@ export const metadata = {
   description: "A wonderful blog about JavaScript",
 };
 
-function RootLayout({ children }) {
-  // TODO: Dynamic theme depending on user preference
-  const theme = "light";
+async function RootLayout({ children }) {
+  const theme = (await cookies()).get("theme") ?? "light";
 
   return (
     <html
       lang="en"
       className={clsx(mainFont.variable, monoFont.variable)}
       data-color-theme={theme}
-      style={theme === "light" ? LIGHT_TOKENS : DARK_TOKENS}
+      style={theme.value === "light" ? LIGHT_TOKENS : DARK_TOKENS}
     >
       <body>
-        <Header theme={theme} />
+        <Header theme={theme.value} />
         <RespectMotionPreferences>
           <main>{children}</main>
         </RespectMotionPreferences>
